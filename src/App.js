@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { fetchWeather } from './api/fetchWeather';
 import './App.css';
@@ -15,6 +15,13 @@ const App = () => {
             setQuery('');
         }
     }
+
+    useEffect(async()=>{
+        if(query === ''){
+            const data = await fetchWeather('iran');
+            setWeather(data);
+        }
+    },[])
 
     return (
         <div className="main-container">
